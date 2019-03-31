@@ -1,49 +1,51 @@
-<?php include '../classes/Category.php'; ?>
+<?php include '../classes/Brand.php'; ?>
 
 <?php
-$category = new Category();
-$categoryList = $category->categoryList();
+$brand = new Brand();
+$brandList = $brand->brandList();
 ?>
 
 <?php
-if (isset($_GET['delcatid'])) {
-    $delid = $_GET['delcatid'];
-    $deleteCategory = $category->deleteCategory($delid);
+if (isset($_GET['branddelid'])) {
+    $delid = $_GET['branddelid'];
+    $deleteBrand = $brand->deleteBrand($delid);
 }
 ?>
+
+
 
 <?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
 <div class="grid_10">
     <div class="box round first grid">
-        <h2>Category List</h2>
+        <h2>Brand List</h2>
         <div class="block">
             <?php
-            if (isset($deleteCategory)) {
-                echo $deleteCategory;
+            if (isset($deleteBrand)) {
+                echo $deleteBrand;
             }
             ?>
             <table class="data display datatable" id="example">
                 <thead>
                     <tr>
                         <th>Serial No.</th>
-                        <th>Category Name</th>
+                        <th>Brand Name</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    if ($categoryList) {
+                    if ($brandList) {
                         $i = 0;
-                        while($value = $categoryList->fetch_assoc()){
+                        while($value = $brandList->fetch_assoc()){
                             $i++;
                             ?>
                             <tr class="odd gradeX">
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $value['categoryName']; ?></td>
+                                <td><?php echo $value['brandName']; ?></td>
                                 <td>
-                                    <a href="catedit.php?catid=<?php echo $value['catId']; ?>">Edit</a> ||
-                                    <a onclick="return confirm('Are you sure to delete?');" href="?delcatid=<?php echo $value['catId']; ?>">Delete</a>
+                                    <a href="brandedit.php?brandid=<?php echo $value['brandId']; ?>">Edit</a> ||
+                                    <a onclick="return confirm('Are you sure to delete?')" href="?branddelid=<?php echo $value['brandId']; ?>">Delete</a>
                                 </td>
                             </tr>
                             <?php

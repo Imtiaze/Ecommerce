@@ -1,6 +1,6 @@
 <?php
-include '../lib/Database.php';
-include '../helpers/Format.php';
+include_once '../lib/Database.php';
+include_once '../helpers/Format.php';
 ?>
 
 <?php
@@ -41,7 +41,7 @@ class Category{
 
 
   public function categoryList() {
-    $queryListCategory = "SELECT * FROM tbl_category";
+    $queryListCategory = "SELECT * FROM tbl_category ORDER BY catId DESC";
     $listCategoryResult = $this->db->select($queryListCategory);
     if ($listCategoryResult) {
       return $listCategoryResult;
@@ -49,7 +49,7 @@ class Category{
   }
 
   public function getCategoryById($catid){
-    $queryGetCategory = "SELECT * FROM tbl_category WHERE id='$catid' ";
+    $queryGetCategory = "SELECT * FROM tbl_category WHERE catId='$catid' ";
     $getCategoryResult = $this->db->select($queryGetCategory);
     if ($getCategoryResult) {
       return $getCategoryResult;
@@ -63,7 +63,7 @@ class Category{
       return $updateMsg;
     }
     else{
-      $queryUpdateCategory = "UPDATE tbl_category SET categoryName='$categoryName' WHERE id='$catid' ";
+      $queryUpdateCategory = "UPDATE tbl_category SET categoryName='$categoryName' WHERE catId='$catid' ";
       $updateCategoryResult = $this->db->update($queryUpdateCategory);
       if ($updateCategoryResult) {
         $updateMsg = "<span style='font-size: 18px; color:green;'>Category updated Succesfully</span>";
@@ -77,7 +77,7 @@ class Category{
   }
 
   public function deleteCategory($delid) {
-    $queryDeleteCategory = "DELETE FROM tbl_category WHERE id='$delid' ";
+    $queryDeleteCategory = "DELETE FROM tbl_category WHERE catId='$delid' ";
     $deleteCategoryResult = $this->db->delete($queryDeleteCategory);
     if ($deleteCategoryResult) {
       $deleteMsg = "<span style='font-size: 18px; color:red;'>Category deleted Succesfully.</span>";
